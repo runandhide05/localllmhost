@@ -5,12 +5,16 @@ An interactive chat platform built using a custom AI model hosted via LM Studio,
 
 Features
 •	Real-time AI Conversations: Users can chat with an AI and receive streaming responses.
+
 •	Streaming Responses: The application streams AI responses token-by-token to give users a smooth, uninterrupted experience.
+
 •	Interactive Frontend: A user-friendly web interface for messaging with the AI.
 
 Tech Stack
 •	Backend: Flask (Python) for handling API requests and responses.
+
 •	Frontend: HTML, CSS, JavaScript for the chat interface.
+
 •	Streaming: Server-Sent Events (SSE) for real-time message streaming.
 
 Setup
@@ -35,6 +39,8 @@ Once the application is running, you can:
    
 Known Issues
 •	Response Stream Cuts Off: Occasionally, the stream may stop prematurely due to client disconnection or timeout. Future versions will handle reconnection or stream resumption.
+
 •	Frontend Formatting: Responses containing newlines might not render properly. Current workaround: converting \n to <br> in the frontend.
+
 License
 This project is licensed under the MIT License. See the LICENSE file for more details.
