@@ -36,15 +36,19 @@ python app.py
 Open your browser and navigate to http://localhost:5001.
 
 Usage
+
 Once the application is running, you can:
 1.	Type a message into the chat input box.
 2.	Press Enter or click the Send button.
 3.	The AI will stream its response in real time below your message.
    
 Known Issues
+
 •	Response Stream Cuts Off: Occasionally, the stream may stop prematurely due to client disconnection or timeout. Future versions will handle reconnection or stream resumption.
 
 •	Frontend Formatting: Responses containing newlines might not render properly. Current workaround: converting \n to <br> in the frontend.
 
 License
+
+
 This project is licensed under the MIT License. See the LICENSE file for more details.
