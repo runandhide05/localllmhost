@@ -4,6 +4,7 @@ An interactive chat platform built using a custom AI model hosted via LM Studio,
 
 
 Features
+
 •	Real-time AI Conversations: Users can chat with an AI and receive streaming responses.
 
 •	Streaming Responses: The application streams AI responses token-by-token to give users a smooth, uninterrupted experience.
@@ -11,6 +12,7 @@ Features
 •	Interactive Frontend: A user-friendly web interface for messaging with the AI.
 
 Tech Stack
+
 •	Backend: Flask (Python) for handling API requests and responses.
 
 •	Frontend: HTML, CSS, JavaScript for the chat interface.
@@ -19,12 +21,14 @@ Tech Stack
 
 Setup
 Requirements
+
 1.	Python 3.7+
 2.	Flask and requests Python packages
 3.	LM Studio running locally.
    
-1.	Configure LM Studio
-o	Ensure LM Studio is running with the appropriate model.
+•   Configure LM Studio
+
+Ensure LM Studio is running with the appropriate model.
 Running the Application
 1.	Start the Flask Server
 python app.py
