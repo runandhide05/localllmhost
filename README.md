@@ -33,7 +33,7 @@ Running the Application
 1.	Start the Flask Server
 python app.py
 2.	Access the Frontend
-Open your browser and navigate to http://localhost:5001.
+Open your browser and navigate to http://localhost:5000.
 
 Usage
 
