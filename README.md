@@ -44,3 +44,4 @@ Known Issues
 •	Frontend Formatting: Responses containing newlines might not render properly. Current workaround: converting \n to <br> in the frontend.
 License
 This project is licensed under the MIT License. See the LICENSE file for more details.
+
