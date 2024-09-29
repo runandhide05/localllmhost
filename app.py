@@ -4,8 +4,7 @@ import json
 
 app = Flask(__name__)
 
-# Set the LM Studio endpoint URL
-LM_STUDIO_URL = "http://127.0.0.1:5001/:1234/v1/chat/completions"
+LM_STUDIO_URL = "http://127.0.0.1:1234/v1/chat/completions"
 
 @app.route('/')
 def index():
@@ -14,7 +13,6 @@ def index():
 @app.route('/chat', methods=['POST', 'GET'])
 def chat():
     if request.method == 'POST':
-        # Use request.get_json() to retrieve JSON data
         data = request.get_json()
         if not data or 'message' not in data:
             return jsonify({'response': 'Error: No message provided.'}), 400
@@ -31,12 +29,10 @@ def chat():
         "Content-Type": "application/json"
     }
 
-    # Define the body of the request with 'stream': True to enable streaming
     payload = {
         "messages": [
             {"role": "user", "content": user_message}
         ],
-        "model": "lmstudio-community/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
         "max_tokens": 1024,
         "stream": True  # Enabling streaming
     }
@@ -45,7 +41,6 @@ def chat():
     response = requests.post(LM_STUDIO_URL, headers=headers, json=payload, stream=True)
     
     if response.status_code == 200:
-        # Handle the streamed response
         def generate_stream():
             buffer = ""
 
@@ -54,10 +49,10 @@ def chat():
                     chunk_decoded = chunk.decode('utf-8').strip()
 
                     if chunk_decoded.startswith("data: "):
-                        json_chunk = chunk_decoded[6:]  # Remove the 'data: ' prefix
+                        json_chunk = chunk_decoded[6:] 
 
                         if json_chunk == "[DONE]":
-                            break  # Stop processing on end of stream signal
+                            break
 
                         try:
                             response_data = json.loads(json_chunk)
