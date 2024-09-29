@@ -22,8 +22,8 @@
         /* Chat Box */
         .chat-box {
             width: 100%;
-            max-width: 600px; /* Max width to prevent it from being too wide */
-            height: 80vh; /* 80% of the viewport height */
+            max-width: 600px;
+            height: 80vh;
             background-color: #1a1a1a;
             border-radius: 12px;
             padding: 20px;
@@ -36,11 +36,11 @@
             text-align: center;
             color: #f5f5f5;
             font-weight: 300;
-            margin: 0 0 20px 0; /* Margin for spacing */
+            margin: 0 0 20px 0;
         }
 
         .messages {
-            flex-grow: 1; /* Allow messages to take up remaining space */
+            flex-grow: 1;
             border: 1px solid #333;
             padding: 10px;
             overflow-y: auto;
@@ -83,9 +83,9 @@
             border-radius: 10px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
-            flex-grow: 1; /* Allow the textarea to grow */
-            height: 60px; /* Default height */
-            resize: none; /* Disable resizing */
+            flex-grow: 1;
+            height: 60px;
+            resize: none;
             font-size: 18px
         }
 
@@ -94,10 +94,9 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6), 0px 0px 15px rgba(0, 255, 255, 0.4);
         }
 
-        /* Send Button */
         button {
-            padding: 12px 20px; /* Adjust padding for size */
-            font-size: 16px; /* Adjust font size */
+            padding: 12px 20px;
+            font-size: 16px;
             background-color: #009688;
             border: none;
             color: white;
@@ -105,7 +104,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
-            margin-left: 10px; /* Space between textarea and button */
+            margin-left: 10px;
         }
 
         button:hover {
@@ -130,7 +129,6 @@
 <div class="chat-box">
     <h2>Ask away...</h2>
     <div class="messages" id="messages">
-        <!-- Messages will appear here -->
     </div>
     <form id="chat-form" style="display: flex; align-items: flex-start;">
         <textarea id="message" placeholder="Type your message..." required></textarea>
@@ -148,50 +146,42 @@
         sendMessage();
     });
 
-    // Function to handle sending messages
     function sendMessage() {
         const userMessage = messageInput.value;
 
-        if (!userMessage.trim()) return; // Prevent sending empty messages
+        if (!userMessage.trim()) return;
 
-        // Create a container for user and AI messages
         const messageContainer = document.createElement('div');
         messageContainer.classList.add('message-container');
 
-        // Add user message to the chat box
         const userMessageDiv = document.createElement('div');
         userMessageDiv.classList.add('message', 'user-message');
         userMessageDiv.textContent = `You: ${userMessage}`;
         messageContainer.appendChild(userMessageDiv);
 
-        // Add the AI message placeholder
         const modelMessageDiv = document.createElement('div');
         modelMessageDiv.classList.add('message', 'model-message');
-        modelMessageDiv.innerHTML = '';  // Start with empty content
+        modelMessageDiv.innerHTML = '';
         messageContainer.appendChild(modelMessageDiv);
 
-        messagesDiv.appendChild(messageContainer);  // Append the entire container
+        messagesDiv.appendChild(messageContainer);
 
-        // Clear the input field
         messageInput.value = '';
 
-        // Create a new EventSource to handle streaming responses
         const eventSource = new EventSource(`/chat?message=${encodeURIComponent(userMessage)}`);
 
         eventSource.onmessage = function(event) {
             if (event.data === "[DONE]") {
-                eventSource.close(); // Close the connection when done
+                eventSource.close();
             } else {
-                // Append the model's response to the model message div
-                // Replace newlines with <br> tags
-                modelMessageDiv.innerHTML += event.data.replace(/\n/g, "<br>");  // Append streamed data
-                messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the bottom
+                modelMessageDiv.innerHTML += event.data.replace(/\n/g, "<br>");
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
             }
         };
 
         eventSource.onerror = function(event) {
             console.error('Error occurred:', event);
-            eventSource.close(); // Close the connection on error
+            eventSource.close();
         };
     }
 
